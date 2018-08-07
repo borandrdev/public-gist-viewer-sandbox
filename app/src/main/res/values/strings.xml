@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">GistViewer</string>
+
+    <string name="tvCommitAdded">Added: %1$d</string>
+    <string name="tvCommitDeleted">Deleted: %1$d</string>
+    <string name="tvFilesTitle">Contents:</string>
+    <string name="tvHistory">History:</string>
+    <string name="tvFileInfo">- %1$s</string>
+
+    <string name="imgAvatar">User avatar</string>
+
+    <string name="btnRefresh">Refresh</string>
+    <string name="btnRetry">Retry</string>
+
+    <string name="by_user">By %1$s</string>
+    <string name="msg_refresh_list">Refresh gist list</string>
+    <string name="err_unknown">Failed to load gist list</string>
+
+</resources>
