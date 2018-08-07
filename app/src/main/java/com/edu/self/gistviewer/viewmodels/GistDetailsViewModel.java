@@ -30,7 +30,7 @@ public class GistDetailsViewModel extends ApiDataLoadingViewModel {
 
     public GistDetailsViewModel(@NonNull Application application) {
         super(application);
-        ((App) application).getDependencies().getAppComponent().inject(this);
+        ((App) application).getDependencies().getGistDetailsComponent().inject(this);
     }
 
     public void getGistDetailsForId(@Nullable String gistId) {

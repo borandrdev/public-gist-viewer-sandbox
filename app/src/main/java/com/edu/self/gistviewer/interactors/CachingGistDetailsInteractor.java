@@ -7,20 +7,14 @@ import com.edu.self.gistviewer.data.api.GistService;
 import com.edu.self.gistviewer.data.model.GistDetails;
 
 public class CachingGistDetailsInteractor extends GistDetailsInteractor {
-    private static final int MAX_LRU_SIZE = 10;
 
     private final LruCache<String, GistDetails> gistDetailsCache;
 
-    public CachingGistDetailsInteractor(@NonNull GistService service) {
+    public CachingGistDetailsInteractor(@NonNull GistService service, @NonNull LruCache<String, GistDetails> gistDetailsCache) {
         super(service);
-        gistDetailsCache = new LruCache<>(MAX_LRU_SIZE);
+        this.gistDetailsCache = gistDetailsCache;
     }
 
-    @SuppressWarnings("unused")
-    public CachingGistDetailsInteractor(@NonNull GistService service, int maxLruCacheSize) {
-        super(service);
-        gistDetailsCache = new LruCache<>(maxLruCacheSize > 0 ? maxLruCacheSize : MAX_LRU_SIZE);
-    }
 
     @Override
     public void fetch(@NonNull String gistId, @NonNull FetchCallback<GistDetails> callback) {
