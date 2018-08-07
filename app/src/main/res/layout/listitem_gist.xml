@@ -20,8 +20,15 @@
             tools:src="@tools:sample/avatars"/>
 
         <TextView
+            android:id="@+id/tvIndex"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            tools:text="0"/>
+
+        <TextView
             android:id="@+id/tvUserName"
-            android:layout_width="0dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
@@ -30,11 +37,13 @@
             android:gravity="center"
             android:lines="1"
             android:padding="4dp"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textSize="20sp"
+            android:transitionName="userName"
             app:layout_constraintBottom_toBottomOf="@+id/imgAvatar"
             app:layout_constraintEnd_toEndOf="@+id/imgAvatar"
             app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="UnusedAttribute"
             tools:text="@tools:sample/full_names"/>
 
         <TextView
@@ -44,10 +53,13 @@
             android:gravity="center_vertical"
             android:padding="8dp"
             android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp"
+            android:transitionName="gistName"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imgAvatar"
             app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UnusedAttribute"
             tools:text="@tools:sample/lorem/random"/>
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

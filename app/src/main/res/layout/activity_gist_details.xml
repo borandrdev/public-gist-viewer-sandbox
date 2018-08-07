@@ -14,13 +14,33 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:gravity="center"
-        android:maxLines="5"
+        android:lines="3"
         android:padding="4dp"
+        android:scrollbars="vertical"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
+        android:transitionName="gistName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UnusedAttribute"
         tools:text="@tools:sample/lorem/random"/>
+
+    <TextView
+        android:id="@+id/tvUserNameByPrefix"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:lines="2"
+        android:padding="4dp"
+        android:text="@string/by_user"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:transitionName="userName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvGistName"
+        tools:ignore="UnusedAttribute"/>
 
     <TextView
         android:id="@+id/tvUserName"
@@ -29,12 +49,15 @@
         android:gravity="center_vertical"
         android:lines="2"
         android:padding="4dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:textColor="@android:color/black"
         android:textSize="20sp"
-        android:textStyle="bold"
+        android:transitionName="userName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvUserNameByPrefix"
         app:layout_constraintTop_toBottomOf="@+id/tvGistName"
+        tools:ignore="UnusedAttribute"
         tools:text="@tools:sample/full_names"/>
 
     <View

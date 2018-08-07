@@ -43,15 +43,12 @@ public class GistListAdapter extends RecyclerView.Adapter<GistListAdapter.ViewHo
         }
     }
 
-//    @Override
-//    public long getItemId(int position) {
-//        return gists.get(position).getId().hashCode();
-//    }
 
     private void bindViewHolderForGist(@NonNull ViewHolder holder, @NonNull Gist gist, int position) {
         User user = gist.getOwner();
         holder.setGist(gist);
-        holder.tvGistName.setText(position + ") " + gist.getName());
+        holder.tvGistName.setText(gist.getName());
+        holder.tvIndex.setText(String.valueOf(position));
         if (user != null) {
             bindViewHolderForGistOwner(holder, user);
         }
@@ -74,6 +71,7 @@ public class GistListAdapter extends RecyclerView.Adapter<GistListAdapter.ViewHo
         private final ImageView imgAvatar;
         private final TextView tvUserName;
         private final TextView tvGistName;
+        private final TextView tvIndex;
         @Nullable
         private Gist gist;
 
@@ -82,10 +80,11 @@ public class GistListAdapter extends RecyclerView.Adapter<GistListAdapter.ViewHo
             imgAvatar = itemView.findViewById(R.id.imgAvatar);
             tvUserName = itemView.findViewById(R.id.tvUserName);
             tvGistName = itemView.findViewById(R.id.tvGistName);
+            tvIndex = itemView.findViewById(R.id.tvIndex);
             if (gistItemClickListener != null) {
                 itemView.setOnClickListener(clickedView -> {
                     if (gist != null) {
-                        gistItemClickListener.onItemClicked(gist);
+                        gistItemClickListener.onItemClicked(gist, itemView);
                     }
                 });
             }
@@ -97,6 +96,6 @@ public class GistListAdapter extends RecyclerView.Adapter<GistListAdapter.ViewHo
     }
 
     public interface IItemClickListener<T> {
-        void onItemClicked(@NonNull T clickedItem);
+        void onItemClicked(@NonNull T clickedItem, @NonNull View clickedItemView);
     }
 }

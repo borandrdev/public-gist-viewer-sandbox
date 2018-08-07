@@ -12,7 +12,7 @@
     <string name="btnRefresh">Refresh</string>
     <string name="btnRetry">Retry</string>
 
-    <string name="by_user">By %1$s</string>
+    <string name="by_user">By</string>
     <string name="msg_refresh_list">Refresh gist list</string>
     <string name="err_unknown">Failed to load gist list</string>
 

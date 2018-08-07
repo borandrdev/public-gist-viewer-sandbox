@@ -82,8 +82,7 @@ public class GistDetailsActivity extends AppCompatActivity {
     private void initObservers() {
         viewModel.isLoading().observe(this, this::updateProgressBarVisibility);
         viewModel.getGistName().observe(this, gistName -> setTextForTextView(gistName, tvGistName));
-        viewModel.getOwner().observe(this, ownerName ->
-                setTextForTextView(getString(R.string.by_user, ownerName), tvUserName));
+        viewModel.getOwner().observe(this, ownerName -> setTextForTextView(ownerName, tvUserName));
         viewModel.getCommits().observe(this, this::populateCommitsList);
         viewModel.getFiles().observe(this, this::populateFilesList);
     }

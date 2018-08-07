@@ -7,6 +7,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -135,11 +138,14 @@ public class GistListActivity extends AppCompatActivity implements GistListAdapt
         scrolledToBottomListener.resetScrolledToBottomEventFired();
     }
 
-    private void openDetailsScreenForGist(@NonNull Gist clickedItem) {
+    private void openDetailsScreenForGist(@NonNull Gist clickedItem, @NonNull View clickedItemView) {
         String gistId = clickedItem.getId();
         if (gistId != null) {
             Intent activityIntent = GistDetailsActivity.getActivityIntentWithExtras(this, gistId);
-            startActivity(activityIntent);
+            Pair<View, String> pair1 = Pair.create(clickedItemView.findViewById(R.id.tvGistName), "gistName");
+            Pair<View, String> pair2 = Pair.create(clickedItemView.findViewById(R.id.tvUserName), "userName");
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, pair1, pair2);
+            ActivityCompat.startActivity(this, activityIntent, options.toBundle());
         }
     }
 
@@ -147,8 +153,8 @@ public class GistListActivity extends AppCompatActivity implements GistListAdapt
 // GistListAdapter.IItemClickListener<Gist> ========================================================
 
     @Override
-    public void onItemClicked(@NonNull Gist clickedItem) {
-        openDetailsScreenForGist(clickedItem);
+    public void onItemClicked(@NonNull Gist clickedItem, @NonNull View clickedItemView) {
+        openDetailsScreenForGist(clickedItem, clickedItemView);
     }
 
 
