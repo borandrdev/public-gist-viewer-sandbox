@@ -18,6 +18,7 @@ import com.edu.self.gistviewer.R;
 import com.edu.self.gistviewer.adapters.CommitListAdapter;
 import com.edu.self.gistviewer.adapters.FileListAdapter;
 import com.edu.self.gistviewer.data.model.CommitDetails;
+import com.edu.self.gistviewer.data.model.Gist;
 import com.edu.self.gistviewer.data.model.GistFile;
 import com.edu.self.gistviewer.viewmodels.GistDetailsViewModel;
 
@@ -29,6 +30,8 @@ public class GistDetailsActivity extends AppCompatActivity {
     @SuppressWarnings("unused")
     private static final String TAG = GistDetailsActivity.class.getSimpleName();
     private static final String EXTRA_STR_GIST_ID = "gist_id";
+    private static final String EXTRA_STR_GIST_NAME = "gist_name";
+    private static final String EXTRA_STR_OWNER_NAME = "owner_name";
 
     private View prgLoading;
 
@@ -39,9 +42,12 @@ public class GistDetailsActivity extends AppCompatActivity {
     private RecyclerView rvFiles;
 
 
-    public static Intent getActivityIntentWithExtras(@NonNull Activity currentActivity, @NonNull String gistId) {
+    public static Intent getActivityIntentWithExtras(@NonNull Activity currentActivity, @NonNull Gist gist) {
         Intent activityIntent = new Intent(currentActivity, GistDetailsActivity.class);
-        activityIntent.putExtra(EXTRA_STR_GIST_ID, gistId);
+        activityIntent.putExtra(EXTRA_STR_GIST_ID, gist.getId());
+        activityIntent.putExtra(EXTRA_STR_GIST_NAME, gist.getName());
+        String ownerName = gist.getOwner() != null ? gist.getOwner().getName() : null;
+        activityIntent.putExtra(EXTRA_STR_OWNER_NAME, ownerName);
         return activityIntent;
     }
 
@@ -68,6 +74,11 @@ public class GistDetailsActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        String gistName = (getIntent() != null ? getIntent().getStringExtra(EXTRA_STR_GIST_NAME) : null);
+        String ownerName = (getIntent() != null ? getIntent().getStringExtra(EXTRA_STR_OWNER_NAME) : null);
+        tvGistName.setText(gistName);
+        tvUserName.setText(ownerName);
+
         initRecyclerView(rvCommits);
         initRecyclerView(rvFiles);
     }
