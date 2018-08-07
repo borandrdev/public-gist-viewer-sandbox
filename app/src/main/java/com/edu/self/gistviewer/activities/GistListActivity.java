@@ -122,7 +122,7 @@ public class GistListActivity extends AppCompatActivity implements GistListAdapt
 
     private void onMoreGistsFetched(@Nullable Integer lastFetchedGistsCount) {
         RecyclerView.Adapter adapter = rvGists.getAdapter();
-        if ((adapter != null) && (lastFetchedGistsCount != null) && (lastFetchedGistsCount > 0)) {   // TODO lastFetchedGistsCount as mvvm
+        if ((adapter != null) && (lastFetchedGistsCount != null) && (lastFetchedGistsCount > 0)) {
             int positionStart = adapter.getItemCount() - lastFetchedGistsCount;
             if (positionStart >= 0) {
                 if (positionStart > 0) {

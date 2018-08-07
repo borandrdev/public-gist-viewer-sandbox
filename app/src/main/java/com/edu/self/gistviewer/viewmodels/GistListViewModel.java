@@ -40,12 +40,10 @@ public class GistListViewModel extends ApiDataLoadingViewModel {
 
     private void onGistListFetched(@Nullable List<Gist> result) {
         updateIsLoading(gistListInteractor.isFetching());
-//        if (result != null) {
-            if (gists.getValue() == null) {
-                gists.setValue(result);
-            }
-            lastFetchedGistsCount.setValue(gistListInteractor.getLastFetchedGistsCount());
-//        }
+        if (gists.getValue() == null) {
+            gists.setValue(result);
+        }
+        lastFetchedGistsCount.setValue(gistListInteractor.getLastFetchedGistsCount());
     }
 
     public void fetchMoreGists() {

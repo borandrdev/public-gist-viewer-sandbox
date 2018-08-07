@@ -115,41 +115,4 @@ public class GistDetailsActivity extends AppCompatActivity {
             prgLoading.setVisibility(isLoading ? View.VISIBLE : View.GONE);
         }
     }
-
-//    private void onGistListUpdated(@Nullable List<Gist> gists) {
-//        String text = "Gists: " + (gists == null ? "null" : gists.size());
-//        Log.i(TAG, text);
-//        Snackbar.make(rvGists, text, Snackbar.LENGTH_LONG).show();
-//        populateGistList(gists);
-//    }
-//
-//    private void populateGistList(@Nullable List<Gist> gists) {
-//        if (gists != null) {
-//            rvGists.setAdapter(new GistListAdapter(gists));
-//        } else {
-//            rvGists.setAdapter(new GistListAdapter(Collections.emptyList()));
-//        }
-//    }
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_gist_list, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 }

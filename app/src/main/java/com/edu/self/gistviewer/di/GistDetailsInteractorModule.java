@@ -22,6 +22,7 @@ public class GistDetailsInteractorModule {
         this.gistDetailsCache = new LruCache<>(MAX_GIST_DETAILS_CACHE_SIZE);
     }
 
+    @SuppressWarnings("unused")
     GistDetailsInteractorModule(@NonNull LruCache<String, GistDetails> gistDetailsCache) {
         this.gistDetailsCache = gistDetailsCache;
     }
