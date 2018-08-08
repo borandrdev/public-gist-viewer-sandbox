@@ -144,6 +144,7 @@ public class GistListActivity extends AppCompatActivity implements GistListAdapt
             Intent activityIntent = GistDetailsActivity.getActivityIntentWithExtras(this, clickedItem);
             Pair<View, String> pair1 = Pair.create(clickedItemView.findViewById(R.id.tvGistName), "gistName");
             Pair<View, String> pair2 = Pair.create(clickedItemView.findViewById(R.id.tvUserName), "userName");
+            //noinspection unchecked
             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, pair1, pair2);
             ActivityCompat.startActivity(this, activityIntent, options.toBundle());
         }

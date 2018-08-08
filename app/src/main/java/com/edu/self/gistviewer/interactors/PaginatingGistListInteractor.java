@@ -86,4 +86,9 @@ public class PaginatingGistListInteractor extends GistListInteractor {
         nextPageToFetch = 1;
         lastFetchedGistsCount = 0;
     }
+
+    @NonNull
+    public List<Gist> getCachedGists() {
+        return gists;
+    }
 }

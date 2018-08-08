@@ -57,7 +57,7 @@ public class GistListViewModel extends ApiDataLoadingViewModel {
 
     public void resetCache() {
         gistListInteractor.resetCache();
-        gists.setValue(null);
+        gists.setValue(gistListInteractor.getCachedGists());
         gistListInteractor.fetchFirstGists(this::onGistListFetched);
     }
 }
