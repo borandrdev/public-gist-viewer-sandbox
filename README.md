@@ -6,7 +6,6 @@ Used: MVVM (ViewModel/LiveData), Dagger2, Retrofit, Gson, Glide
 
 TODOs:
 - add RxJava usage
-- add error handling for single gist details screen
 - unit tests
 - ui tests
 - Master-detail fragment on single screen for tablets

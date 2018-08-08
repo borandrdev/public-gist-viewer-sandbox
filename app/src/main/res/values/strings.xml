@@ -15,5 +15,6 @@
     <string name="by_user">By</string>
     <string name="msg_refresh_list">Refresh gist list</string>
     <string name="err_unknown">Failed to load gist list</string>
+    <string name="err_failed_to_fetch_details">Failed to fetch gist details</string>
 
 </resources>

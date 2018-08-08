@@ -27,6 +27,7 @@ public class GistDetailsViewModel extends ApiDataLoadingViewModel {
     private final MutableLiveData<String> gistUser = new MutableLiveData<>();
     private final MutableLiveData<List<CommitDetails>> commits = new MutableLiveData<>();
     private final MutableLiveData<Map<String, GistFile>> files = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> isFailedToFetchDetails = new MutableLiveData<>();
 
     public GistDetailsViewModel(@NonNull Application application) {
         super(application);
@@ -36,6 +37,7 @@ public class GistDetailsViewModel extends ApiDataLoadingViewModel {
     public void getGistDetailsForId(@Nullable String gistId) {
         if ((gistId != null) && !gistId.isEmpty()) {
             interactor.fetch(gistId, this::onDetailsFetched);
+            isFailedToFetchDetails.setValue(false);
         }
     }
 
@@ -48,6 +50,8 @@ public class GistDetailsViewModel extends ApiDataLoadingViewModel {
             gistUser.setValue(gistDetails.getOwner().getName());
             commits.setValue(gistDetails.getCommits());
             files.setValue(gistDetails.getContents());
+        } else {
+            isFailedToFetchDetails.setValue(true);
         }
     }
 
@@ -69,5 +73,10 @@ public class GistDetailsViewModel extends ApiDataLoadingViewModel {
     @NonNull
     public MutableLiveData<Map<String, GistFile>> getFiles() {
         return files;
+    }
+
+    @NonNull
+    public MutableLiveData<Boolean> getIsFailedToFetchDetails() {
+        return isFailedToFetchDetails;
     }
 }

@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.edu.self.gistviewer.R;
 import com.edu.self.gistviewer.adapters.CommitListAdapter;
@@ -96,6 +97,14 @@ public class GistDetailsActivity extends AppCompatActivity {
         viewModel.getOwner().observe(this, ownerName -> setTextForTextView(ownerName, tvUserName));
         viewModel.getCommits().observe(this, this::populateCommitsList);
         viewModel.getFiles().observe(this, this::populateFilesList);
+        viewModel.getIsFailedToFetchDetails().observe(this, this::closeScreenWithMessageIfFailedToFecthData);
+    }
+
+    private void closeScreenWithMessageIfFailedToFecthData(@Nullable Boolean isFailedToFetchData) {
+        if ((isFailedToFetchData != null) && isFailedToFetchData) {
+            Toast.makeText(this, R.string.err_failed_to_fetch_details, Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 
     private void populateCommitsList(@Nullable List<CommitDetails> commits) {
