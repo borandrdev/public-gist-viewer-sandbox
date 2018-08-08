@@ -1,5 +1,6 @@
 package com.edu.self.gistviewer.activities;
 
+import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +30,8 @@ import java.util.List;
 
 public class GistListActivity extends AppCompatActivity implements GistListAdapter.IItemClickListener<Gist>, RecyclerViewScrolledToBottomListener.IScrolledToBottomListener {
     private static final String TAG = GistListActivity.class.getSimpleName();
+
+    private static final int REQUEST_CODE_SHOW_GIST_DETAILS = 1;
 
     private View prgLoading;
     private RecyclerView rvGists;
@@ -78,6 +81,13 @@ public class GistListActivity extends AppCompatActivity implements GistListAdapt
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if ((requestCode == REQUEST_CODE_SHOW_GIST_DETAILS) && (resultCode != Activity.RESULT_OK)) {
+            viewModel.onFailedToFetchGistDetails();
+        }
+    }
 
     private void initView() {
         rvGists.setLayoutManager(new LinearLayoutManager(this));
@@ -89,6 +99,14 @@ public class GistListActivity extends AppCompatActivity implements GistListAdapt
         viewModel.getGists().observe(this, this::onGistListUpdated);
         viewModel.isLoading().observe(this, this::updateProgressBarVisibility);
         viewModel.getLastFetchedGistsCount().observe(this, this::onMoreGistsFetched);
+        viewModel.getIsFailedToFetchGistDetails().observe(this, this::showErrorToFetchGistDetailsMessageIfRequired);
+    }
+
+    private void showErrorToFetchGistDetailsMessageIfRequired(Boolean isFailedToFetchGistDetails) {
+        if ((isFailedToFetchGistDetails != null) && isFailedToFetchGistDetails) {
+            snackbar = Snackbar.make(rvGists, R.string.err_failed_to_fetch_details, Snackbar.LENGTH_SHORT);
+            snackbar.show();
+        }
     }
 
     private void updateProgressBarVisibility(Boolean isLoading) {
@@ -139,6 +157,7 @@ public class GistListActivity extends AppCompatActivity implements GistListAdapt
     }
 
     private void openDetailsScreenForGist(@NonNull Gist clickedItem, @NonNull View clickedItemView) {
+        viewModel.beforeOpenGistDetailsScreen();
         String gistId = clickedItem.getId();
         if (gistId != null) {
             Intent activityIntent = GistDetailsActivity.getActivityIntentWithExtras(this, clickedItem);
@@ -146,7 +165,7 @@ public class GistListActivity extends AppCompatActivity implements GistListAdapt
             Pair<View, String> pair2 = Pair.create(clickedItemView.findViewById(R.id.tvUserName), "userName");
             //noinspection unchecked
             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, pair1, pair2);
-            ActivityCompat.startActivity(this, activityIntent, options.toBundle());
+            ActivityCompat.startActivityForResult(this, activityIntent, REQUEST_CODE_SHOW_GIST_DETAILS, options.toBundle());
         }
     }
 

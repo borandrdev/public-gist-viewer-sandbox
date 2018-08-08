@@ -13,7 +13,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.edu.self.gistviewer.R;
 import com.edu.self.gistviewer.adapters.CommitListAdapter;
@@ -66,6 +65,8 @@ public class GistDetailsActivity extends AppCompatActivity {
         initView();
         initViewModel();
         initObservers();
+
+        setResult(Activity.RESULT_OK);
     }
 
     private void initViewModel() {
@@ -102,7 +103,7 @@ public class GistDetailsActivity extends AppCompatActivity {
 
     private void closeScreenWithMessageIfFailedToFecthData(@Nullable Boolean isFailedToFetchData) {
         if ((isFailedToFetchData != null) && isFailedToFetchData) {
-            Toast.makeText(this, R.string.err_failed_to_fetch_details, Toast.LENGTH_SHORT).show();
+            setResult(Activity.RESULT_CANCELED);
             finish();
         }
     }

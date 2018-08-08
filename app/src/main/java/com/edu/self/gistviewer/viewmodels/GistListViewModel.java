@@ -20,6 +20,7 @@ public class GistListViewModel extends ApiDataLoadingViewModel {
 
     private final MutableLiveData<List<Gist>> gists = new MutableLiveData<>();
     private final MutableLiveData<Integer> lastFetchedGistsCount = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> isFailedToFetchGistDetails = new MutableLiveData<>();
 
     @Inject
     PaginatingGistListInteractor gistListInteractor;
@@ -59,5 +60,18 @@ public class GistListViewModel extends ApiDataLoadingViewModel {
         gistListInteractor.resetCache();
         gists.setValue(gistListInteractor.getCachedGists());
         gistListInteractor.fetchFirstGists(this::onGistListFetched);
+    }
+
+    public void beforeOpenGistDetailsScreen() {
+        isFailedToFetchGistDetails.setValue(null);
+    }
+
+    public void onFailedToFetchGistDetails() {
+        isFailedToFetchGistDetails.setValue(true);
+    }
+
+    @NonNull
+    public MutableLiveData<Boolean> getIsFailedToFetchGistDetails() {
+        return isFailedToFetchGistDetails;
     }
 }
