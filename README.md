@@ -5,9 +5,8 @@ The app consists of two screens: list of gists with pagination and single gist d
 Used: MVVM (ViewModel/LiveData), Dagger2, Retrofit, Gson, Glide
 
 TODOs:
-- add RxJava usage
 - unit tests
 - ui tests
 - Master-detail fragment on single screen for tablets
-- Navigation component (Cicerone or Google Navigation)
+- Navigation component (Google Navigation)
 - ContentLoadingProgressbar
