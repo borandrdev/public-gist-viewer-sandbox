@@ -9,4 +9,6 @@ TODOs:
 - ui tests
 - Master-detail fragment on single screen for tablets
 - Navigation component (Google Navigation)
+- Pagination library
+- Repository pattern
 - ContentLoadingProgressbar
